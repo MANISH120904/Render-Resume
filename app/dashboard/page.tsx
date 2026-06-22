@@ -1,40 +1,37 @@
-import Link from "next/link";
-
+import { CreateNewResumeCard } from "@/components/dashboard/CreateNewResumeCard";
+import { CreditBanner } from "@/components/dashboard/CreditBanner";
+import { FunnelCharts } from "@/components/dashboard/FunnelCharts";
+import { ResumeGrid } from "@/components/dashboard/ResumeGrid";
 import { Navbar } from "@/components/layout/Navbar";
 import { requireUser } from "@/lib/auth";
+import { MOCK_DASHBOARD_DATA } from "@/lib/mock/dashboard";
+import { getUserProfile } from "@/lib/profile";
 
 export default async function DashboardPage() {
   const user = await requireUser();
+  const profile = await getUserProfile(user.id);
   const displayName =
-    user.profile?.name ?? user.email?.split("@")[0] ?? "there";
+    profile?.fullName ??
+    user.profile?.name ??
+    user.email?.split("@")[0] ??
+    "User";
+  const creditBalance =
+    profile?.currentCredits ?? MOCK_DASHBOARD_DATA.creditBalance;
 
   return (
     <>
-      <Navbar isAuthenticated />
-      <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col gap-6 px-4 py-10 md:px-8">
-        <p className="font-mono text-[13px] font-medium uppercase tracking-[0.12em] text-text-secondary">
-          Dashboard
-        </p>
+      <Navbar
+        isAuthenticated
+        activePath="dashboard"
+        creditBalance={creditBalance}
+        userName={displayName}
+      />
 
-        <h1 className="text-3xl font-bold text-text-primary md:text-4xl">
-          Welcome back, {displayName}
-        </h1>
-
-        <p className="max-w-2xl text-base leading-relaxed text-text-secondary">
-          You&apos;re signed in as{" "}
-          <span className="font-medium text-text-primary">{user.email}</span>.
-          The full dashboard UI ships in Feature 14 — this page confirms OAuth
-          and route protection are working.
-        </p>
-
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Link
-            href="/"
-            className="inline-flex h-11 items-center justify-center rounded-md border border-border-light bg-surface px-4 text-sm font-semibold text-text-primary transition-colors hover:bg-surface-secondary"
-          >
-            Back to homepage
-          </Link>
-        </div>
+      <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col gap-6 px-4 py-8 md:px-8 md:py-10">
+        <CreditBanner downloadCredits={creditBalance} />
+        <CreateNewResumeCard />
+        <ResumeGrid resumes={MOCK_DASHBOARD_DATA.resumes} />
+        <FunnelCharts />
       </main>
     </>
   );

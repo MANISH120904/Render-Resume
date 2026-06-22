@@ -1,8 +1,8 @@
 ---
 name: remember
-description: Save what matters at the end of a session so the next session picks up exactly where you left off. Or restore context at the start of a new session so nothing is lost between them.
+description: Saves session state to memory.md or restores it at session start. Use at end of session with /remember save, at start with /remember restore, or when the user runs /remember.
+disable-model-invocation: true
 ---
-
 AI has no memory between sessions. Every new session starts blank. This skill fixes that.
 
 Run it at the end of a session to save. Run it at the start of a new session to restore. That is all it does — but done consistently, it means nothing ever gets lost.

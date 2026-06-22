@@ -1,6 +1,7 @@
 ---
 name: recover
-description: When something goes wrong during a build, diagnose what type of failure it is before deciding how to respond. Targeted fix, hard reset, or full rethink — the right response depends on the right diagnosis.
+description: Diagnoses build failures and prescribes targeted fix, hard reset, or rethink based on failure mode. Use when something goes wrong during development or when the user runs /recover.
+disable-model-invocation: true
 ---
 
 Not every problem is a bug. Not every bug needs debugging.

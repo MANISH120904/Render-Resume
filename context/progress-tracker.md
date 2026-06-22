@@ -6,11 +6,11 @@ Update this file after every completed feature. Any AI agent reading this should
 
 ## Current Status
 
-**Phase:** Phase 1 — Foundation  
-**Last completed:** 02 Auth (2026-06-22)  
-**Next:** 03 PostHog Initialization — instrumentation-client.ts, identify on login, reset on logout
+**Phase:** Phase 5 — Dashboard  
+**Last completed:** 14 Dashboard Page — Full UI (2026-06-22)  
+**Next:** 05 Stripe Initialization (Phase 1 carry-over) or 15 Dashboard Data Wiring
 
-**Backend:** InsForge provisioned (Render Resume — `7n9p3vut.ap-southeast.insforge.app`). Google + GitHub OAuth enabled. Tables and storage not created yet.
+**Backend:** InsForge provisioned (Render Resume — `7n9p3vut.ap-southeast.insforge.app`). Google + GitHub OAuth enabled. `profiles` + `resumes` tables, `resumes` storage bucket, and RLS policies live. Schema source: `insforge/schema.sql`.
 
 **Deployment:** AWS Lightsail 2 GB + Docker + Cloudflare. $12/mo (covered by $100–200 AWS credits for ~6 months). InsForge handles auth/DB/storage only. See architecture.md Deployment Model.
 
@@ -22,8 +22,8 @@ Update this file after every completed feature. Any AI agent reading this should
 
 - [x] **01 Homepage** — UI complete (Navbar, Hero, HeroVisual, Features, PricingTable, Footer). Auth-aware CTAs link to `/login` or `/dashboard` via session.
 - [x] **02 Auth** — `@insforge/sdk/ssr` OAuth (Google/GitHub), server-owned cookies, `proxy.ts` route protection, `/callback`, auth API routes.
-- [ ] **03 PostHog Initialization** — `instrumentation-client.ts`, `lib/posthog-client.ts`, `lib/posthog-server.ts`, `/ingest` proxy in `next.config.ts`. Identify on login, reset on logout.
-- [ ] **04 Database Schema** — Tables: `profiles`, `resumes` (incl. `last_downloaded_at`). RLS on both tables + storage policies on `resumes` bucket.
+- [x] **03 PostHog Initialization** — `instrumentation-client.ts`, `lib/posthog-client.ts`, `lib/posthog-server.ts`, `/ingest` proxy in `next.config.ts`. Identify on login, reset on logout.
+- [x] **04 Database Schema** — `profiles` + `resumes` tables, `on_auth_user_created` trigger, private `resumes` bucket, RLS on tables + `storage.objects`. Schema: `insforge/schema.sql`.
 - [ ] **05 Stripe Initialization** — Stripe client, India (₹10) and Global ($1.00) Price IDs, webhook handler for credit fulfillment.
 
 ### Phase 2 — Resume Workspace & Ingestion
@@ -45,7 +45,7 @@ Update this file after every completed feature. Any AI agent reading this should
 
 ### Phase 5 — Dashboard
 
-- [ ] **14 Dashboard Page — Full UI** — Credit banner, Create New CTA, Resume Grid, funnel chart placeholders.
+- [x] **14 Dashboard Page — Full UI** — Credit banner, Create New CTA, Resume Grid, FunnelCharts mock (recharts), empty state, profile credits on navbar/banner. Builder placeholder route. Navbar active `text-primary`, mobile nav links visible.
 - [ ] **15 Dashboard Data Wiring** — Real `current_credits`, resume list from InsForge, Edit/Download actions.
 - [ ] **16 Analytics Charts — PostHog Data** — Ingestions, previews, downloads charts wired to PostHog events via recharts.
 
@@ -68,8 +68,8 @@ Update this file after every completed feature. Any AI agent reading this should
 | `STRIPE_WEBHOOK_SECRET` | **Missing** | Webhook signature verification |
 | `STRIPE_PRICE_ID_IN` | **Missing** | India ₹10 tier |
 | `STRIPE_PRICE_ID_GLOBAL` | **Missing** | Global $1.00 tier |
-| `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` | **Missing** | PostHog project token (US Cloud) |
-| `NEXT_PUBLIC_POSTHOG_HOST` | **Missing** | `https://us.i.posthog.com` |
+| `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` | **Set** | US Cloud project `480946` |
+| `NEXT_PUBLIC_POSTHOG_HOST` | **Set** | `https://us.i.posthog.com` |
 | InsForge OAuth redirect URLs | **Not configured** | Add `http://localhost:3000/callback` + production `/callback` in InsForge dashboard Auth settings |
 | AWS account + Lightsail 2 GB | **Not provisioned** | Ubuntu 22.04, `ap-south-1` or `us-east-1` |
 | AWS billing budget alerts | **Not configured** | Set at $10 and $25 in AWS Budgets |

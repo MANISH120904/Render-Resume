@@ -1,6 +1,7 @@
 ---
 name: imprint
-description: After building any UI component, extract the visual patterns that matter for consistency and save them to ui-registry.md. So every component built after this one matches what came before.
+description: Extracts visual patterns from UI components and saves them to ui-registry.md for consistency across the interface. Use after building UI components, when running /imprint, or when auditing UI consistency with /imprint audit.
+disable-model-invocation: true
 ---
 
 UI consistency does not happen by accident. It happens because every component is built with awareness of what already exists.

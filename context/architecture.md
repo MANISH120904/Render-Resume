@@ -230,8 +230,12 @@ export const MAX_COMPILE_CONCURRENCY = 2;
 │   │   ├── Features.tsx
 │   │   └── PricingTable.tsx
 │   ├── dashboard/
+│   │   ├── CreditBadge.tsx
 │   │   ├── CreditBanner.tsx
+│   │   ├── CreateNewResumeCard.tsx
+│   │   ├── ResumeCard.tsx
 │   │   ├── ResumeGrid.tsx
+│   │   ├── UserAvatar.tsx
 │   │   └── FunnelCharts.tsx
 │   ├── workspace/
 │   │   ├── DetailsForm.tsx
@@ -245,10 +249,13 @@ export const MAX_COMPILE_CONCURRENCY = 2;
 │   ├── insforge-client.ts             → Browser InsForge client (`@insforge/sdk/ssr`)
 │   ├── insforge-server.ts             → Server InsForge client
 │   ├── auth.ts                        → getCurrentUser, requireUser
+│   ├── profile.ts                     → getUserProfile (credits, name from profiles)
 │   ├── stripe.ts                      → Stripe initialization
 │   ├── posthog-client.ts              → PostHog browser client
 │   ├── posthog-server.ts              → PostHog server client
-│   └── utils.ts                       → Shared utilities and constants
+│   ├── utils.ts                       → Shared utilities and constants
+│   └── mock/
+│       └── dashboard.ts               → Mock dashboard data (UI phase; replaced in Feature 15)
 └── types/
     └── index.ts                       → Global cross-application types
 ```

@@ -1,8 +1,8 @@
 ---
 name: review
-description: After building a feature, verify it matches what was planned, respects the system architecture and design standards, and is ready for production. Reports issues clearly so the developer decides what to fix.
+description: Verifies built features match the plan, respect architecture and design standards, and are production-ready. Reports issues without fixing. Use after completing features or when the user runs /review.
+disable-model-invocation: true
 ---
-
 Building is not done when the code runs. It is done when the code is correct.
 
 AI moves fast. Fast means things get built that work on the surface but drift from the architecture, violate the design system, or miss edge cases that matter. This skill catches those things before they compound into bigger problems.
