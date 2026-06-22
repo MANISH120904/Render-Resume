@@ -48,3 +48,4 @@ context/aws-steps.md
 next-env.d.ts
 .agents/
 .cursor/
+.vscode/
