@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Font — pair with Inter from next/font/google via variable: "--font-sans" on <html> */
+  --font-sans: "Inter", sans-serif;
+
+  /* Page and surface backgrounds */
+  --color-background: var(--token-background);
+  --color-surface: var(--token-surface);
+  --color-surface-secondary: var(--token-surface-secondary);
+  --color-canvas: var(--token-canvas);
+  --color-page: var(--token-page);
+  --color-sunken: var(--token-sunken);
+  --color-inverse: var(--token-inverse);
+  --color-paper: var(--token-paper);
+  --color-paper-foreground: var(--token-paper-foreground);
+  --color-paper-muted: var(--token-paper-muted);
+
+  /* Borders */
+  --color-border-light: var(--token-border-light);
+  --color-border-muted: var(--token-border-muted);
+  --color-border-strong: var(--token-border-strong);
+
+  /* Text */
+  --color-text-primary: var(--token-text-primary);
+  --color-text-secondary: var(--token-text-secondary);
+  --color-text-muted: var(--token-text-muted);
+  --color-text-tertiary: var(--token-text-tertiary);
+  --color-text-inverse: var(--token-text-inverse);
+
+  /* Primary accent — brand blue */
+  --color-primary: var(--token-primary);
+  --color-primary-hover: var(--token-primary-hover);
+  --color-primary-light: var(--token-primary-light);
+  --color-primary-muted: var(--token-primary-muted);
+
+  /* Success — fulfillment and compilation */
+  --color-success: #10b981;
+  --color-success-dark: #059669;
+  --color-success-light: var(--token-success-light);
+
+  /* Warning — low credits / draft state */
+  --color-warning: #f59e0b;
+  --color-warning-light: var(--token-warning-light);
+
+  /* Error — compilation failed / upload failed */
+  --color-error: #ef4444;
+  --color-error-light: var(--token-error-light);
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+}
+
+:root {
+  color-scheme: light;
+
+  --token-background: #ffffff;
+  --token-surface: #ffffff;
+  --token-surface-secondary: #f9fafb;
+  --token-canvas: #f3f4f6;
+  --token-page: #fafafa;
+  --token-sunken: #f1f2f4;
+  --token-inverse: #0b0c0f;
+  --token-paper: #ffffff;
+  --token-paper-foreground: #15161a;
+  --token-paper-muted: #6b7280;
+
+  --token-border-light: #e5e7eb;
+  --token-border-muted: #d1d5db;
+  --token-border-strong: #15161a;
+
+  --token-text-primary: #15161a;
+  --token-text-secondary: #6b7280;
+  --token-text-muted: #9ca3af;
+  --token-text-tertiary: #9ca3af;
+  --token-text-inverse: #ffffff;
+
+  --token-primary: #2356f6;
+  --token-primary-hover: #1a45d6;
+  --token-primary-light: #dbeafe;
+  --token-primary-muted: #eff6ff;
+
+  --token-success-light: #d1fae5;
+  --token-warning-light: #fef3c7;
+  --token-error-light: #fee2e2;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-elevated: 0 1px 4px rgba(10, 13, 18, 0.06);
+  --shadow-glow: 0 0 0 0 transparent;
+  --hero-glow: none;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --token-background: #101218;
+  --token-surface: #181b24;
+  --token-surface-secondary: #1f2430;
+  --token-canvas: #0c0e14;
+  --token-page: #0b0c10;
+  --token-sunken: #12151c;
+  --token-inverse: #050608;
+  --token-paper: #f8f9fc;
+  --token-paper-foreground: #15161a;
+  --token-paper-muted: #6b7280;
+
+  --token-border-light: #2a3040;
+  --token-border-muted: #3a4154;
+  --token-border-strong: #525a6e;
+
+  --token-text-primary: #f0f2f6;
+  --token-text-secondary: #a3aab8;
+  --token-text-muted: #6f7788;
+  --token-text-tertiary: #7a8294;
+  --token-text-inverse: #ffffff;
+
+  --token-primary: #4d7cff;
+  --token-primary-hover: #6b93ff;
+  --token-primary-light: #1a2744;
+  --token-primary-muted: #141d33;
+
+  --token-success-light: #0f2a22;
+  --token-warning-light: #2a2210;
+  --token-error-light: #2a1418;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-glow: 0 0 48px rgba(77, 124, 255, 0.12);
+  --hero-glow: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    rgba(77, 124, 255, 0.14),
+    transparent 70%
+  );
+}
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply min-h-full bg-page font-sans text-text-primary antialiased transition-colors duration-300;
+  }
+
+  .dark body {
+    background-image: var(--hero-glow);
+    background-repeat: no-repeat;
+  }
+}
+
+@layer utilities {
+  .card-shadow {
+    box-shadow: var(--shadow-card);
+  }
+
+  .elevated-shadow {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .primary-glow {
+    box-shadow: var(--shadow-glow);
+  }
+}
